@@ -21,6 +21,39 @@
         
         <div class="container">
 
+            <!-- Navbar -->
+            <div class="row">
+                <div class="col-md-12">
+
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <div class="container-fluid">
+                          <a class="navbar-brand" href="#">Navbar</a>
+                          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                          </button>
+                          <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                              <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="#">Features</a>
+                              </li>
+                              <li class="nav-item">
+                                <button id="cart" type="button" class="btn btn-secondary mr=20" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="This is your cart">
+                                  Cart(0)
+                                </button>
+                                <a class="btn btn-success ml=10" href="/checkout" role="button">Checkout</a>
+                              </li>
+
+                            </ul>
+                          </div>
+                        </div>
+                      </nav>
+
+                </div>
+            </div>
+
             <!-- Searchbar row -->
             <div class="row">
                 <div class="col-md-12">
@@ -45,7 +78,7 @@
                         <div class="card">
                             <img src="{{ product.image.url }}" alt="" class="card-img-top">
                             <div class="card-body">
-                                <div class="card-title">
+                                <div id="nm{{ product.id }}" class="card-title">
                                     {{ product.title }}
                                 </div>
                                 <div class="card-text">
@@ -93,7 +126,7 @@
 <!-- JavaScript -->
 <script type="text/javascript">
     console.log("Hello world");
-    
+   
     if(localStorage.getItem('cart') == null) {
         var cart = {};
     }
@@ -112,7 +145,31 @@
             cart[item_id] = 1;
         }
         console.log(cart);
-    })
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById("cart").innerHTML = "Cart("+ Object.keys(cart).length +")";
+
+    });
+
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    });
+    
+    DisplayCart(cart);
+
+    function DisplayCart(cart) {
+        var cartString = "";
+        cartString += "Cart has been added";
+        var cartIndex = 1;
+
+        for(var x in cart) {
+            cartString += cartIndex;
+            cartString += document.getElementById("nm" + x).innerHTML + "Qty:" + cart[x];
+            cartIndex += 1
+        }
+        document.getElementById("cart").setAttribute("data-content", cartString);
+        
+    }
 
 </script>
 
