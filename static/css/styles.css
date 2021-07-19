@@ -38,6 +38,6 @@
     margin-bottom: 20px;
 }
 
-.nav-item-unique .a {
-    margin: 10px;
+.card a, button {
+    margin-top: 15px;
 }
