@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'vbsvkjjcm%xhbr443iv=#gjrfrddp8n@7zskn^lz_&h1+h-=ca'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['jimmys-ecommerce.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['jimmys-mens-accessories.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'shop',
 ]
 
